@@ -1,0 +1,129 @@
+---
+layout: post
+title: Can V Deliver on Its Promises?
+date: 2025-05-17
+---
+When Alexander Medvednikov announced the V language it was to both cheers of "This is the best language I've seen!" and skepticism "These claims can't possibly be true". Controversies have dogged the V language to the point that actual contributors and users have very little tolerance to critics. As one Hacker News user put it:
+
+> *"Vlang is infamous for crowdfunding on the back of many extremely grandiose, but not actually implemented claims."* [link](https://news.ycombinator.com/item?id=38837769)
+
+But lost in the noise is a simpler question: is it actually good as a language?
+
+So rather than diving into the history of the language, let's start with first impressions.
+
+## First impressions
+
+Out of the box, running just `v` launches a REPL. This enforces the feel of a high level language even if the compiler warns that it's "highly experimental".
+
+As expected, the "Hello, world" is simple and script-like:
+
+```vlang
+fn main() {
+    println("Hello, world!")
+}
+```
+
+Again, similar to scripting languages, V has its own package repository somewhat unimaginatively called *VPM*. While not beating Odin, it's close: just type `v install raylib` and it's downloaded.
+
+Using the Raylib bindings clearly shows that they are generated: `raylib.is_key_down(int(raylib.KeyboardKey.key_down))` is not particularly reasonable compared to Zig's `rl.IsKeyDown(rl.KEY_LEFT)` or Odin's `rl.IsKeyDown(.LEFT)`, but inevitable with the C-to-V conversion the bindings rely on.
+
+
+```v
+import raylib
+
+fn main() 
+{
+    raylib.init_window(1280, 768, 'Testing')
+    mut pos := raylib.Vector2{640, 320}
+    for !raylib.window_should_close() {
+        raylib.begin_drawing()
+        raylib.clear_background(raylib.blue)
+        raylib.draw_rectangle_v(pos, raylib.Vector2{32, 32}, raylib.green)
+        if raylib.is_key_down(int(raylib.KeyboardKey.key_left)) {
+            pos.x -= 400 * raylib.get_frame_time()
+        }
+        if raylib.is_key_down(int(raylib.KeyboardKey.key_right)) {
+           pos.x += 400 * raylib.get_frame_time()
+        }
+        if raylib.is_key_down(int(raylib.KeyboardKey.key_up)) {
+           pos.y -= 400 * raylib.get_frame_time()
+        }
+        if raylib.is_key_down(int(raylib.KeyboardKey.key_down)) {
+           pos.y += 400 * raylib.get_frame_time()
+        }
+        raylib.end_drawing()
+    }
+    raylib.close_window()
+}
+```
+
+
+## The language: a mixed set of features
+
+On paper this language looks very appealing: you get “immutable by default” variables, a “minimalist design” that promises tight code, and a suite of safety features—bounds checking, option (?) and result (!) types, and the outright elimination of null pointers. For concurrency, V sports Go-like channels and it memory management promises "autofree" without a GC.
+
+```vlang
+s := '[{"name":"Frodo", "age":25}, {"name":"Bobby", "age":10}]'
+// 'users' is implicitly freed 
+mut users := json.decode([]User, s) or {
+    eprintln('Failed to parse json')
+    return
+}
+for user in users {
+    println('${user.name}: ${user.age}')
+}`
+```
+
+Similar to Odin, it also gives you built-in dynamic arrays and maps.
+
+However, all of these features pull in different directions. It's illustrative that there is an escape hatch to enable globals that seems to be used quite a lot:
+
+```vlang
+@[has_globals]
+// Game state
+__global ball = raylib.Vector2{screen_width / 2, screen_height / 2}
+__global ball_direction = raylib.Vector2{1, 1}
+```
+
+The "autofree" is in theory similar to that of the [Lobster](https://strlen.com/lobster/) language, but in practice V is using a regular GC and it's unclear whether it will ever come close to its initial claims.
+
+What does V try to be? Is it a simpler Rust, a more low level Go language or a C alternative with a cleaner syntax?
+
+The fairly loose memory management is very far from Odin or Zig. For V optimizing memory management appears to be something you do at the end for optimization (even disregarding the fact that "autofree" doesn't work yet). Of course, while this might be expected for projects written in Rust or modern C++, it might not sit well with programmers that want C's low level control.
+
+This means that V isn't ideal for projects requiring more precise resource management as it is much less straightforward to achieve.
+
+Visually, V code is clean and arguably outshines Odin in clarity. It's no wonder that it struck a chord when it was first announced. Zig code in comparison feels coarse and inelegant, without any clear payoff in readability. 
+
+Despite visual clarity, the language semantics feel unfinished. Despite ensurances that the language "will not change much" it's really unclear how a 1.0 of the language will work. One user summed it up this way:
+
+> *"After reading a lot of threads/articles/comments about this language, I'm convinced that V adopted the 'Fake it till you make it' philosophy."* [link](https://www.reddit.com/r/ProgrammingLanguages/comments/j4sjdb/the_v_programming_language/)
+
+## Using V
+
+On a more positive note, V comes with a lot of different examples, from a self learning Flappy Bird to working with ORMs. The standard library also boasts everything from SSL connections to DB clients. However, if we look closely, those are actually bindings to existing C libraries, and not anything written in native V.
+
+This means that the actual standard library code is largely wrappers around well-known C libraries. It is one thing to have the standard library depend on one or two C libraries, but the amount of C libraries that goes into the V standard library does not seem to be small.
+
+While Odin has something similar in its `vendor`, those libraries are at least well controlled and understood to be external dependencies. In the V case this is much more opaque, which potentially could put a developer in a very tight spot when trying to ship something believed only to be dependent on the V standard library, but in reality depends on many different C libraries.
+
+I think "brittle" is the best way to describe the situation. This underlying fragility, which by all accounts have bee present since V’s early days, makes it hard to recommend the language for serious use.
+
+## The future of V
+
+In 2020 Medvednikov announced that after 0.4 the language would quickly reach 1.0. Five years later, it's still at 0.4, and the text was updated to say "after 0.6". Even disregarding controversies, it's clear that V is not really able to hit its targets. 
+
+In software this is nothing new, Zig has a similar problem, with 1.0 being ready in two years for several years now. However, V is rather exceptional in how many self imposed deadlines it has failed to meet. The language really feels like an 0.4 language in terms of stability, even if it is much more mature in terms of toolchain completeness.
+
+Past controversies also pose a larger problem for the language: not only has it lost momentum, but there are a lot of people which simply will not use it on account of being a scam. And this in turn hurts the long term prospects of V. As one Hacker News commenter bluntly put it:
+
+> *"The root cause is that V initially made some promises that seemed completely unrealistic... and some that are arguably impossible... When V was eventually released, the implementation fell very short of these goals."* [link](https://www.reddit.com/r/ProgrammingLanguages/comments/vq4ul6/why_does_v_language_get_so_much_hate/)
+
+The language has a lot to prove, and a long way to go before it matures. On the positive side, its syntax is almost universally well loved.
+
+## Summary
+
+I've tried to avoid talking about the elephant in the room – namely, the many accusations that V is a scam – and focused instead on the language’s actual merits. It’s syntactically elegant, but its semantics are haphazard, its key features incomplete, and its tooling clearly not yet battle-tested.
+
+With its high-level memory model, V feels less like a C replacement and more like a lightweight Rust or C++ alternative.
+V looks great in a screenshot, but real software rarely lives there. So for now at least, Jai, Odin, and Zig all remain safer and more pragmatic choices.
