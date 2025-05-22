@@ -120,6 +120,12 @@ However, most other C3 users seemed to disagree with that opinion:
 For a language designer who is advocating only [innovating if there is no other option](https://c3.handmade.network/blog/p/8682-some_language_design_lessons_learned), it's clear that
 Lernö must have felt that adding error handling was a must-have improvement.
 
+## Compile time and operator overloading
+
+Aside from error handling, the major difference compared to C is the macro system. Gone is the trusty – but problematic - C preprocessor, replaced by compile time macros similar to Zig. Although whereas Zig’s comptime is sometimes somewhat implicit, C3's macros are clearly inspired by the C preprocessor in that the compile time statements are orthogonal in style to runtime code, which has been both applauded and criticized.
+
+Operator overloading is noteworthy in that neither Odin nor Zig – the other two most C-like alternatives – have been interested in implementing it. Andrew Kelley expressing it to be in violation to Zig's philosophy. It's interesting that C3 chooses to be more similar to Jai and V, both of which support operator overloading.
+
 ## Still small and evolving
 
 While Odin and Zig are fairly stable feature wise (and V at least intending to be so), C3 is still refining  itself. While the language is stable enough to only have breaking releases for dot-1 increments, it's still evolving with operator overloading for arithmetics only added in a recent release.
@@ -131,12 +137,6 @@ While the Raylib bindings were fine, it is clear that all the "vendor-fetch" lib
 C3’s community remains comparatively small next to Zig, Odin, and V. On the positive side, Lernö has a stellar reputation for responding to bug reports. Release schedules also follow a regular timetable, with new 0.0.1 releases every month. Odin similarly has a monthly release schedule, but Zig still (at the time of this writing) struggles with their massive dot-1 yearly releases which puts a lot of stress on the community.
 
 Still it's clear that it doesn't yet have the same momentum.
-
-## Compile time and operator overloading
-
-Aside from error handling, the major difference compared to C is the macro system. Gone is the trusty – but problematic - C preprocessor, replaced by compile time macros similar to Zig. Although whereas Zig’s comptime is sometimes somewhat implicit, C3's macros are clearly inspired by the C preprocessor in that the compile time statements are orthogonal in style to runtime code, which has been both applauded and criticized.
-
-Operator overloading is noteworthy in that neither Odin nor Zig – the other two most C-like alternatives – have been interested in implementing it. Andrew Kelley expressing it to be in violation to Zig's philosophy. It's interesting that C3 chooses to be more similar to Jai and V, both of which support operator overloading.
 
 ## Summary
 
