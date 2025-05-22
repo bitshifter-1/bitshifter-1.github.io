@@ -142,7 +142,7 @@ Operator overloading is noteworthy in that neither Odin nor Zig – the other tw
 
 C3 is a compelling option, particularly for C and C++ developers: it seeks to modernize the C experience without abandoning the language's core principles.  Its enhancements in safety, performance, and ergonomics make it a strong contender in the low level programming domain and beyond. While it may not yet have the extensive ecosystems of some of its peers, its design philosophy and compatibility with C position it as a practical choice for projects requiring both modern features and legacy integration.
 
-Compared to Jai, Odin, Zig, and V, C3 clearly carves out its own principles ideas, distinct from the others. While its features are more complex than Odin and Zig's, in part due to its commitment to preserving C's syntax and semantics, whereas both Odin and Zig Zig has had an easier time trimming away features.
+Compared to Jai, Odin, Zig, and V, C3 clearly carves out its own principles ideas, distinct from the others. While its features are more complex than Odin and Zig's, in part due to its commitment to preserving C's syntax and semantics, whereas both Odin and Zig has had an easier time trimming away features.
 
 That is not to say that C3 feels particularly complex. It's familiar and approachable with excellent ergonomics and a feature set that feels very complete without being overwhelming.
 
