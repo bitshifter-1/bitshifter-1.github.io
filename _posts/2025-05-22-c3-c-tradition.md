@@ -148,4 +148,4 @@ That is not to say that C3 feels particularly complex. It's familiar and approac
 
 ---
 
-Discuss this article [on Reddit](https://www.reddit.com/r/programming/comments/1kszaxr/c3_iterative_innovation_in_the_c_tradition/).
+Discuss this article [on Reddit](https://www.reddit.com/r/programming/comments/1kszaxr/c3_iterative_innovation_in_the_c_tradition/) or [Hacker News](https://news.ycombinator.com/item?id=44065756).
