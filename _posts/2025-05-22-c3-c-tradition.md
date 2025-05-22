@@ -145,3 +145,7 @@ C3 is a compelling option, particularly for C and C++ developers: it seeks to mo
 Compared to Jai, Odin, Zig, and V, C3 clearly carves out its own principles ideas, distinct from the others. While its features are more complex than Odin and Zig's, in part due to its commitment to preserving C's syntax and semantics, whereas both Odin and Zig Zig has had an easier time trimming away features.
 
 That is not to say that C3 feels particularly complex. It's familiar and approachable with excellent ergonomics and a feature set that feels very complete without being overwhelming.
+
+---
+
+Discuss this article [on Reddit](https://www.reddit.com/r/programming/comments/1kszaxr/c3_iterative_innovation_in_the_c_tradition/).
