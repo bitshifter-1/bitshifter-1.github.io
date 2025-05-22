@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "C3: Iterative Innovation in the C Tradition"
+title: "Is C3 the Underdog That Will Overtake Zig and Odin?"
 date: 2025-05-22
 ---
 
