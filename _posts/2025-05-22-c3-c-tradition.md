@@ -3,6 +3,9 @@ layout: post
 title: "C3: Iterative Innovation in the C Tradition"
 date: 2025-05-22
 ---
+
+(The previous post, on V, can be read [here](https://bitshifters.cc/2025/05/17/vlang.html))
+
 In the ever-evolving landscape of systems programming languages, C3 emerges as a language that seeks to modernize C without abandoning its foundational principles. Designed to be an evolution rather than a revolution, C3 is intended to leverage familiar syntax while introducing enhancements aimed at improving safety, ergonomics, and performance.
 
 The language began development in mid 2019, after C2 contributor Christoffer Lernö decided to branch out on his own, and the compiler is still primarily a single-developer effort, even though it experienced a breakthrough in popularity from mid 2024.
@@ -149,3 +152,5 @@ That is not to say that C3 feels particularly complex. It's familiar and approac
 ---
 
 Discuss this article [on Reddit](https://www.reddit.com/r/programming/comments/1kszaxr/c3_iterative_innovation_in_the_c_tradition/) or [Hacker News](https://news.ycombinator.com/item?id=44065756).
+
+The next post in the series will compare the languages covered so far.
