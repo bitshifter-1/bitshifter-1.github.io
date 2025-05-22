@@ -27,3 +27,18 @@ But what will happen now? Rust is ascendant, being fairly well known
 offer anything beyond what C/C++/Rust offers?
 
 This is what I want to explore in later blog posts.
+
+The story so far:
+
+### Language overviews
+
+1. [Jai, the game programming contender](/2025/04/28/jai.html)
+2. [Odin, A Pragmatic C Alternative with a Go Flavour](/2025/05/04/odin.html)
+3. [Zig: A New Direction for Low-Level Programming?](/2025/05/04/zig.html)
+4. [Next up: C3, Hare and V](/2025/05/12/the-rest.html)
+5. [Can V Deliver on Its Promises?](/2025/05/17/vlang.html)
+6. [Is C3 the Underdog That Will Overtake Zig and Odin?](https://bitshifters.cc/2025/05/22/c3-c-tradition.html)
+
+### Language comparisons
+
+TBD
